@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agata Anielska Portfolio Website - The Cultural Center and Museum of Japanese Art, Tree of Memory</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ebd392a408.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="headersecond">
+        <div class="container">
+            <nav>
+                <a href="index.html"><img src="img/logo.png" class="logo"></a>
+                <ul id="sidemenu">
+                    <li><a href="index.html#header">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
+    <div class="project">
+        <div>
+            <div class="container">
+                <h2 class="project-title">The Cultural Center and Museum of Japanese Art, Tree of Memory</h2>
+            </div>
+        </div>
+        <div class="slider">
+            <div class="slides">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="img/P_5/Muzeum_1.jpg" alt="Image 1">
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="img/P_5/Muzeum_3.jpg" alt="Image 3">
+                </div>
+                <div class="slide">
+                    <img src="img/P_5/Muzeum_5.jpg" alt="Image 5">
+                </div>
+                <div class="slide">
+                    <img src="img/P_5/Muzeum_6.jpg" alt="Image 6">
+                </div>
+            </div>
+            <!-- Navigation buttons -->
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+        </div>
+        <div>
+            <p id="description">The world is shrinking. The constant development of communication and transportation allows people from all over the globe to meet. This creates the need for friendly spaces that facilitate business meetings, conferences, cultural events, and, of course, pleasant leisure time. The idea for the International Cultural Center and Museum of Japanese Art in Hiroshima was born out of the desire to create a space that integrates educational, cultural, and recreational functions. It will be a place that brings together not only the residents of Hiroshima but also people from around the world. The location of the building is not coincidental. Hiroshima was the site of a great tragedy in human history, one that should never be forgotten. The city was completely destroyed by the atomic bomb explosion. However, it was rebuilt to become today a vibrant metropolis that serves as a living monument to a profoundly significant event from World War II.
+
+            The site is located in a well-connected area on a peninsula near Senda Park, close to the Hiroshima City Library and a sports center. A very important historical structure, which was destroyed and later rebuilt after World War II, is Hiroshima Castle. It served as an inspiration for the building's form, with a concept that involves the stacking of levels, reminiscent of a pagoda. Additionally, the surrounding floor slabs symbolize the clouds that enveloped the city after the explosion. The vertical posts on the exterior and the wooden cladding on parts of the building represent the city's reconstruction. Moreover, the wooden façade cladding with ropes allows for the incorporation of more greenery, which is an integral part of the building. This is another idea reflected in the four-story building, which, when viewed from above, resembles the shape of a tree.</p>
+        </div>
+    </div>
+    <script>
+let currentSlide = 0;
+
+function showSlide(index) {
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+    
+    if (index >= totalSlides) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+    } else {
+        currentSlide = index;
+    }
+    
+    slides.style.transform = `translateX(${-currentSlide * 100}%)`;
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+// Optional: Auto-slide functionality
+setInterval(() => {
+    nextSlide();
+}, 5000); // Change slide every 3 seconds
+    </script>
+    <script>
+
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        
+        function opentab(tabname){
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+        }
+    </script>
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+    
+        function openmenu(){
+            sidemenu.style.right = "0";
+        }
+        function closemenu(){
+            sidemenu.style.right = "-200px";
+        }
+    
+    </script>
+</body>
+</html>

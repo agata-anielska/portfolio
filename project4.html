@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agata Anielska Portfolio Website - Tea Pavilion</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ebd392a408.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="headersecond">
+        <div class="container">
+            <nav>
+                <a href="index.html"><img src="img/logo.png" class="logo"></a>
+                <ul id="sidemenu">
+                    <li><a href="index.html#header">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
+    <div class="project">
+        <div>
+            <div class="container">
+                <h2 class="project-title">Tea Pavilion</h2>
+            </div>
+        </div>
+        <div class="slider">
+            <div class="slides">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="img/P_4/Pawilon_1.jpg" alt="Image 1">
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="img/P_4/Pawilon_2.jpg" alt="Image 2">
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="img/P_4/Pawilon_3.jpg" alt="Image 3">
+                </div>
+                <div class="slide">
+                    <img src="img/P_4/Pawilon_5.jpg" alt="Image 5">
+                </div>
+            </div>
+            <!-- Navigation buttons -->
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+        </div>
+        <div>
+            <p id="description">Tea Pavilion, a student club for young people. Its location is a 35 x 60 m square on the grounds of Gdańsk University of Technology (formerly the site of the Yugoslav Pavilion 3 and 4), surrounded by the Faculty of Electronics, Telecommunications, and Informatics buildings, as well as the Faculty of Mechanical Engineering and Ship Technology. The Tea Pavilion serves as a meeting place for students and staff of the university. It will also be a welcoming space for visitors from outside the university. Additionally, the pavilion will play a significant role in hosting tea ceremonies, allowing students to learn about Japanese tea traditions. The pavilion will enable both Polish and international students to experience Japanese culture.
+ 
+            The building's layout is based on three hexagons. The geometric form reflects the neighboring Building B of the Faculty of Electronics, Telecommunications, and Informatics. The concept itself is closely linked to nature. The central structure, with a cutout featuring a small courtyard, is one story taller than the two smaller, single-story hexagons. Additionally, the central part is covered by a roof structure composed of triangular surfaces, giving the entire building the shape of a mountain or volcano.
+                
+            Undoubtedly, a key aspect of the project is the greenery that complements the nature-oriented concept, as well as a stream that flows under the glass-covered passage between the central and right sections of the building. The greenery seeks to blend into the building through the use of large glass windows and the incorporation of plants inside. The terrace connected to the garden allows visitors to fully appreciate the charm of the surroundings.
+                
+            The structure on the left side of the building houses a small concert hall where piano performances can be held. In the right section, there is a tea ceremony room, designed in a traditional Japanese style. The fully glazed passageway also provides access to the terrace. The large hexagon contains a reception area, restrooms, a lecture hall, and an enclosed courtyard that serves as a space for relaxation and meditation. A distinctive feature of this courtyard is a cherry tree (sakura) located in the center. On the upper floor, there is a restaurant connected to a café, along with a terrace that also has tables. Additionally, there is a room with computers and a small library where students can study and work.
+                
+            The design process took into account the needs of people with disabilities, which is why the building is situated on a flat surface with no entrance stairs. An elevator is planned inside, surrounded by a staircase.
+                
+            The pavilion is a modern yet cozy space, primarily intended for young people but not exclusively. It is a place where visitors can experience the culture of the Land of the Rising Sun and enjoy a friendly atmosphere where they can relax, study, eat, spend time with friends, or drink tea.</p>
+        </div>
+    </div>
+    <script>
+let currentSlide = 0;
+
+function showSlide(index) {
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+    
+    if (index >= totalSlides) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+    } else {
+        currentSlide = index;
+    }
+    
+    slides.style.transform = `translateX(${-currentSlide * 100}%)`;
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+// Optional: Auto-slide functionality
+setInterval(() => {
+    nextSlide();
+}, 5000); // Change slide every 3 seconds
+    </script>
+    <script>
+
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        
+        function opentab(tabname){
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+        }
+    </script>
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+    
+        function openmenu(){
+            sidemenu.style.right = "0";
+        }
+        function closemenu(){
+            sidemenu.style.right = "-200px";
+        }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agata Anielska Portfolio Website - Photographer's House</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ebd392a408.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="headersecond">
+        <div class="container">
+            <nav>
+                <a href="index.html"><img src="img/logo.png" class="logo"></a>
+                <ul id="sidemenu">
+                    <li><a href="index.html#header">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
+    <div class="project">
+        <div>
+            <div class="container">
+                <h2 class="project-title">Photographer's House</h2>
+            </div>
+        </div>
+        <div class="slider">
+            <div class="slides">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="img/P_7/Wnetrza_1.jpg" alt="Image 1">
+                </div>
+                <div class="slide">
+                    <img src="img/P_7/Wnetrza_3.jpg" alt="Image 3">
+                </div>
+                <div class="slide">
+                    <img src="img/P_7/Wnetrza_4.jpg" alt="Image 4">
+                </div>
+                <div class="slide">
+                    <img src="img/P_7/Wnetrza_6.jpg" alt="Image 6">
+                </div>
+                <div class="slide">
+                    <img src="img/P_7/Moodboard_1.JPG" alt="Image 7">
+                </div>
+            </div>
+            <!-- Navigation buttons -->
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+        </div>
+        <div>
+            <p id="description">The subject of the project is a building serving as the Social Services Center in Sopot at ul. Reja. The building was designed as passive. The corners of the building were designed as rounded, which translates into lower heat losses in the building. The main assumption was to design the elevation in such a way that the longer elevation of the building was located on the south side in order to obtain the greatest possible solar gains and the shorter one on the north to prevent heat loss. Therefore, a large glazing was designed on the south side, with its extension on the roof. In order to prevent the building from overheating, a system of wooden blinds was designed to provide shading in the summer and access to sunlight in the winter.
+
+            Another key assumption of the project was to design in accordance with the principles of universal design. A number of solutions were provided to ensure accessibility for users with different needs. The layout of the building was designed in an intuitive way, allowing people with disabilities to move freely.
+                
+            The building program includes many different functions. We have a customer service room, café, playroom, conference rooms, therapy room, psychologist's office, computer room, offices and a senior club.</p>
+        </div>
+    </div>
+    <script>
+let currentSlide = 0;
+
+function showSlide(index) {
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+    
+    if (index >= totalSlides) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+    } else {
+        currentSlide = index;
+    }
+    
+    slides.style.transform = `translateX(${-currentSlide * 100}%)`;
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+// Optional: Auto-slide functionality
+setInterval(() => {
+    nextSlide();
+}, 5000); // Change slide every 3 seconds
+    </script>
+    <script>
+
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        
+        function opentab(tabname){
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+        }
+    </script>
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+    
+        function openmenu(){
+            sidemenu.style.right = "0";
+        }
+        function closemenu(){
+            sidemenu.style.right = "-200px";
+        }
+    
+    </script>
+</body>
+</html>

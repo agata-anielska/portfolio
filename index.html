@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agata Anielska Portfolio Website</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ebd392a408.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <a href="#header"><img src="img/logo_kopia.png" class="logo">
+            <ul class="first" id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" style="color: #fff;" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <p class="slide-left">Architect</p>
+            <h1 class="slide-left">Hi, I'm <span>Agata</span><br> Anielska. </h1>
+            <div class="links slide-left">
+                <a href="my_work.html" class="btn0">Show Projects</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------about----------->
+<div id="about">
+    <div class="container">
+        <div class="row"> 
+            <div class="about-col-1">
+                <img src="img/tlo2.png">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p id="me">I am a graduate of the Bachelor's program at the Faculty of Architecture of Gdańsk University of Technology. I completed my studies with distinction, receiving the Gold Graduate Badge of Gdańsk University of Technology. During my studies, I became particularly interested in the topic of sustainable development in architecture. In my projects, I strive to focus on solutions that address these issues. Additionally, the use of AI in design is a subject I find extremely intriguing, as I believe it offers tremendous potential for enhancing the design process. I would like to pursue development in this field in the future.</p>
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Programms</span><br>Revit | AutoCad | SketchUp | Lumion | Rhino + Grasshopper | Adobe Photoshop | Gimp | Figma</li>
+                        <li><span>AI Tools</span><br>MidJoruney | StableDiffusion</li>
+                        <li><span>Languages</span><br>Polish - Native Language | English - C1</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>May 2023 - January 2024</span><br>MIDI Pracownia Architektoniczna</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2024-2026</span><br>Master studies at the Faculty of Architecture at Gdansk University of Technology</li>
+                        <li><span>2020-2024</span><br>Bachelor of Science in Architecture at Gdansk University of Technology</li>
+                        <li><span>2017-2020</span><br>II General Secondary School at Elblag</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- services-->
+ <div id="services">
+    <div class="container">
+        <h1 class="sub-title">My Services</h1>
+        <div class="services-list">
+            <div>
+                <i class="fa-solid fa-pencil"></i>
+                <h2>Architecture Design</h2>
+                <p>While working in an architectural studio, I gained experience in working at the concept and construction stages.</p>
+                <!-- <a href="">Learn more</a> -->
+            </div>
+            <div>
+                <i class="fa-solid fa-computer-mouse"></i>
+                <h2>BIM Creation</h2>
+                <p>During my studies, I became proficient in working on BIM models. The projects I developed during my studies were mostly created in Revit.</p>
+                <!-- <a href="">Learn more</a> -->
+            </div>
+            <div>
+                <i class="fa-solid fa-robot"></i>
+                <h2>Using AI Tools</h2>
+                <p>Recently, I have been expanding my knowledge towards learning and improving the use of AI-related tools.</p>
+                <!-- <a href="">Learn more</a> -->
+            </div>
+        </div>
+    </div>
+ </div>
+<!-----portfolio---->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="img/Ai_1_kwadrat.png">
+                <div class="layer">
+                    <h3>AI renders</h3>
+                    <p>Renders created with MidJourney and StableDiffusion</p>
+                    <a href="my_work.html#projects1"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="img/Projekt_1.jpg">
+                <div class="layer">
+                    <h3>Project as part of studies</h3>
+                    <p>Projects completed as part of various university subjects, including architectural design and faculty.</p>
+                    <a href="my_work.html#projects2"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="img/Makieta_2.jpg">
+                <div class="layer">
+                    <h3>Architectural models and drawings</h3>
+                    <p>Handmade models and drawings created as part of various subjects taken during studies.</p>
+                    <a href="my_work.html#projects3"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+        </div>
+        <a href="my_work.html" class="btn">See more</a>
+    </div>
+</div>
+<!-----------contact----------->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fa-solid fa-paper-plane"></i> agata.anielska3@gmail.com</p>
+                <p><i class="fa-solid fa-square-phone"></i> +48 668 947 070</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/agata.anielska.73"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/vnielska/"><i class="fa-brands fa-instagram"></i></i></a>
+                    <a href="https://anielska.artstation.com/"><i class="fa-brands fa-artstation"></i></a>
+                    <a href="https://pl.linkedin.com/"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+                <a href="img/Agata_Anielska_CV.pdf" download class="btn btn2">Download CV & Portfolio</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © Agata Anielska. Made with Easy Tutorials <i class="fa-solid fa-heart"></i></p>
+    </div>
+</div>
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+</script>
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+
+</script>
+<script>
+    const scriptURL = '<https://script.google.com/macros/s/AKfycbzKdhtl7FFB_XkhBEYjuyJVTOD7acHBlsiZAjmMslkT5pCohR7cxS_Vt7pm4iVreO21/exec>'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+</body>
+</html>

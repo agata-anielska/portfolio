@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agata Anielska Portfolio Website - Expo 2025 Osaka Back to Roots</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ebd392a408.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="headersecond">
+        <div class="container">
+            <nav>
+                <a href="index.html"><img src="img/logo.png" class="logo"></a>
+                <ul id="sidemenu">
+                    <li><a href="index.html#header">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
+    <div class="project">
+        <div>
+            <div class="container">
+                <h2 class="project-title">Expo 2025 Osaka Back to Roots</h2>
+            </div>
+        </div>
+        <div class="slider">
+            <div class="slides">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="img/P_6/Expo_1.png" alt="Image 1">
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="img/P_6/Expo_2.png" alt="Image 2">
+                </div>
+                <div class="slide">
+                    <img src="img/P_6/Expo_6.jpg" alt="Image 6">
+                </div>
+            </div>
+            <!-- Navigation buttons -->
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+        </div>
+        <div>
+            <p id="description">The main idea of the project is a "return to roots." It is inspired by traditional Polish folk symbols. The building's shape in plan view resembles a pierogi, a traditional Polish dish. Additionally, the design references red beads, folk cutouts, meadows—especially poppies associated with them—and the ribbons characteristic of small rural chapels. In line with the themes promoted by EXPO 2025, such as "saving lives," "designing future society for our lives," and "empowering lives," the building's structure has been designed in wood, reflecting the principles of sustainable development. The concept also draws on the elements of water and wind, which are closely tied to the pavilion's location. Positioned to the south, facing the sea, the beads will "flutter" in the wind, evoking another symbol associated with Poland—the stork and its distinctive clattering sound. 
+
+            The building is three stories high, with the ground floor and first floor consisting of enclosed spaces with open terraces, while the second floor is a completely open space with greenery, giving the sense of being in nature. The pavilion's program includes a restaurant-café with facilities, a concert hall, a conference room, an exhibition space, and a video room connected to an online platform.</p>
+        </div>
+    </div>
+    <script>
+let currentSlide = 0;
+
+function showSlide(index) {
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+    
+    if (index >= totalSlides) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+    } else {
+        currentSlide = index;
+    }
+    
+    slides.style.transform = `translateX(${-currentSlide * 100}%)`;
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+// Optional: Auto-slide functionality
+setInterval(() => {
+    nextSlide();
+}, 5000); // Change slide every 3 seconds
+    </script>
+    <script>
+
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        
+        function opentab(tabname){
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+        }
+    </script>
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+    
+        function openmenu(){
+            sidemenu.style.right = "0";
+        }
+        function closemenu(){
+            sidemenu.style.right = "-200px";
+        }
+    
+    </script>
+</body>
+</html>

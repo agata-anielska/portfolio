@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agata Anielska Portfolio Website - My work</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ebd392a408.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="headersecond">
+    <div class="container">
+        <nav>
+            <a href="index.html"><img src="img/logo.png" class="logo"></a>
+            <ul id="sidemenu">
+                <li><a href="index.html#header">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+    <div class="container">
+        <h1 class="sub-title">My work</h1>
+    </div>
+    <div class="smaller-container" id="projects1">
+        <h2>AI renders</h2>
+    </div>
+    <div class="full-img" id="fullImgBox">
+        <img src="img/Projekt_1.png" id="fullImg">
+        <span onclick="closeFullImg()">X</span>
+    </div>
+    <div class="img-gallery"> 
+        <a href="project_a_1.html"><img src="img/Ai_1_kwadrat.png"></a>
+        <a href="project_a_2.html"><img src="img/Ai_2_kwadrat.png"></a>  
+        <a href="project_a_6.html"><img src="img/Ai_6_kwadrat.png"></a>  
+        <a href="project_a_3.html"><img src="img/Ai_3_kwadrat.png"></a>   
+        <a href="project_a_4.html"><img src="img/Ai_4_kwadrat.png"></a>   
+        <a href="project_a_7.html"><img src="img/Ai_7_kwadrat.png"></a>   
+        <a href="project_a_5.html"><img src="img/Ai_5_kwadrat.png"></a>                   
+    </div>
+    <div class="smaller-container" id="projects2">
+        <h2>Project as a part of studies</h2>
+    </div>
+    <div class="full-img" id="fullImgBox">
+        <img src="img/Projekt_1.png" id="fullImg">
+        <span onclick="closeFullImg()">X</span>
+    </div>
+    <div class="img-gallery"> 
+        <a href="project1.html"><img src="img/Projekt_1.jpg"></a>
+        <a href="project2.html"><img src="img/Projekt_2.jpg"></a>  
+        <a href="project3.html"><img src="img/Projekt_11.jpg"></a>  
+        <a href="project4.html"><img src="img/Projekt_4.jpg"></a>   
+        <a href="project5.html"><img src="img/Projekt_5.jpg"></a>   
+        <a href="project6.html"><img src="img/Projekt_6.png"></a>   
+        <a href="project7.html"><img src="img/Projekt_8.jpg"></a>                
+    </div>
+    <div class="smaller-container" id="projects3">
+        <h2>Architectural models and drawings</h2>
+    </div>
+    <div class="full-img" id="fullImgBox">
+        <img src="img/Projekt_1.png" id="fullImg">
+        <span onclick="closeFullImg()">X</span>
+    </div>
+    <div class="img-gallery"> 
+        <a href="project_m_1.html"><img src="img/Makieta_1.jpg"></a>
+        <a href="project_m_2.html"><img src="img/Makieta_2.jpg"></a>  
+        <a href="project_m_3.html"><img src="img/Makieta_3.jpg"></a>  
+        <a href="project_m_4.html"><img src="img/Makieta_4.jpg"></a> 
+        <a href="project_m_5.html"><img src="img/Rysunek_1.jpg"></a>   
+        <a href="project_m_6.html"><img src="img/Rysunek_2.jpg"></a>   
+        <a href="project_m_7.html"><img src="img/Rysunek_3.jpg"></a>     
+    </div>
+</div>
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+</script>
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+
+</script>
+</body>
