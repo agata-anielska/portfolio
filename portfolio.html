@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agata | Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-variant":"#e5e2e1","secondary-container":"#e4e2e2","tertiary-container":"#1c1b1a",
+          "surface-container-high":"#ebe7e6","primary-container":"#1c1b1b","on-surface":"#1c1b1b",
+          "inverse-primary":"#c8c6c5","outline-variant":"#c4c7c7","surface-tint":"#5f5e5e",
+          "surface-bright":"#ffffff","tertiary-fixed":"#e6e2df","on-primary-fixed":"#1c1b1b",
+          "on-tertiary-fixed":"#1c1b1a","on-secondary-container":"#646464","on-error":"#ffffff",
+          "primary":"#1A1A1A","on-primary-fixed-variant":"#474746","on-secondary-fixed":"#1b1c1c",
+          "on-secondary":"#ffffff","on-secondary-fixed-variant":"#474747","error-container":"#ffdad6",
+          "inverse-on-surface":"#f4f0ef","surface-container-lowest":"#ffffff","primary-fixed":"#e5e2e1",
+          "on-primary":"#ffffff","surface-dim":"#ddd9d8","on-primary-container":"#858383",
+          "background":"#ffffff","surface-container-low":"#f7f3f2","on-tertiary":"#ffffff",
+          "on-error-container":"#93000a","secondary-fixed-dim":"#c8c6c6","surface-container":"#f1edec",
+          "inverse-surface":"#313030","outline":"#747878","secondary-fixed":"#e4e2e2",
+          "on-background":"#1A1A1A","primary-fixed-dim":"#c8c6c5","tertiary":"#1A1A1A",
+          "tertiary-fixed-dim":"#cac6c4","on-tertiary-container":"#868382","on-surface-variant":"#444748",
+          "surface-container-highest":"#e5e2e1","on-tertiary-fixed-variant":"#484645",
+          "surface":"#ffffff","secondary":"#5e5e5e","error":"#ba1a1a","aqua":"#00FFFF"
+        },
+        "borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px","brand":"12px"},
+        "spacing":{"gutter":"48px","container-max":"1400px","page-margin":"120px","section-gap":"160px"},
+        "fontFamily":{"display":["Poppins"],"body-md":["Poppins"],"label-sm":["Poppins"],"headline-lg":["Poppins"],"body-lg":["Poppins"],"headline-md":["Poppins"]}
+      }
+    }
+  }
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: #1A1A1A; overflow-x: hidden; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .section-padding { padding-top: 160px; padding-bottom: 160px; }
+
+#main-nav {
+    opacity: 0;
+    transform: translate(-50%, -16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    left: 50%;
+  }
+  #main-nav.nav-visible { 
+    opacity: 1; 
+    transform: translate(-50%, 0); 
+    pointer-events: auto; 
+  }
+  /* ══════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════ */
+  .hero-bg { background: #ffffff; }
+
+ 
+  .hero-rest { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .hero-rest.revealed { opacity: 1; transform: translateY(0); }
+
+  .typing-cursor::after {
+    content: '|';
+    animation: blink 0.8s step-end infinite;
+    color: #1A1A1A;
+    margin-left: 2px;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  
+
+  /* ══════════════════════════════════════
+     ABOUT
+  ═══════════════════════════════════════ */
+  .gradient-title {
+    line-height: 1.3 !important;
+    padding-bottom: 0.1em;
+    display: block;
+    background: linear-gradient(135deg, #1A1A1A 0%, #06b6d4 50%, #a78bfa 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradShift 4s linear infinite alternate;
+  }
+  @keyframes gradShift { 0%{background-position:0%} 100%{background-position:100%} }
+
+  .about-line { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .about-line.in-view { opacity: 1; transform: translateY(0); }
+
+  /* ══════════════════════════════════════
+     SELECTED WORKS
+  ═══════════════════════════════════════ */
+  .works-heading { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .works-heading.in-view { opacity: 1; transform: translateY(0); }
+
+  .project-card { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .project-card.in-view { opacity: 1; transform: translateY(0); }
+
+  .card-img { transition: transform 0.35s ease; }
+  .card-clickable { cursor: pointer; }
+  .card-clickable:hover .card-img { transform: scale(1.06); }
+
+  /* project title hover underline */
+  .proj-title { position: relative; display: inline-block; }
+  .proj-title::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 0; height: 1.5px;
+    background: #06b6d4;
+    transition: width 0.3s ease;
+  }
+  .card-clickable:hover .proj-title::after { width: 100%; }
+
+  .filter-btn { transition: background 0.3s ease, color 0.3s ease; border: none; outline: none; }
+  .filter-btn.is-active { background: #1A1A1A !important; color: #ffffff !important; }
+  .filter-btn:not(.is-active) { background: transparent; color: #5e5e5e; }
+  .filter-btn:not(.is-active):hover { color: #1A1A1A; }
+
+  .nav-link { color: #1A1A1A; transition: color 0.2s ease; }
+  .nav-link:hover, .nav-link.active { color: #06b6d4; }
+
+  #works-wrapper { position: relative; }
+  .works-grid { transition: opacity 0.4s ease, transform 0.4s ease; }
+  .works-grid.g-visible { opacity: 1; transform: translateY(0); position: relative; pointer-events: auto; }
+  .works-grid.g-hidden  { opacity: 0; transform: translateY(8px); position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; }
+
+  /* ══════════════════════════════════════
+     EXPERIENCE
+  ═══════════════════════════════════════ */
+  
+  .exp-item { cursor: pointer; }
+  .exp-dot { transition: background 0.3s ease; }
+
+  #skills-container { position: relative; min-height: 220px; }
+  .skill-panel { transition: opacity 0.4s ease, transform 0.4s ease; }
+  .skill-panel.sp-visible { opacity: 1; transform: translateY(0); position: relative; pointer-events: auto; }
+  .skill-panel.sp-hidden  { opacity: 0; transform: translateY(8px); position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; }
+
+  /* Timeline divider label */
+  .timeline-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a1a1aa;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .timeline-label::after { content: ''; flex: 1; height: 1px; background: #f4f4f5; }
+
+  /* ══════════════════════════════════════
+     CONTACT
+  ═══════════════════════════════════════ */
+  .contact-section { position: relative; overflow: hidden; }
+  .contact-section::before {
+    content: '';
+    position: absolute; inset: -60px;
+    background: conic-gradient(from 0deg at 50% 50%, #ffffff, #cffafe, #a5f3fc, #e0f2fe, #ddd6fe, #ffffff, #cffafe);
+    animation: spinGrad 8s linear infinite;
+    filter: blur(60px); opacity: 0.55; z-index: 0; border-radius: 50%;
+  }
+  @keyframes spinGrad { 0%{transform:rotate(0deg) scale(1.5)} 100%{transform:rotate(360deg) scale(1.5)} }
+  .contact-inner { position: relative; z-index: 1; }
+
+  .contact-link {
+    background: linear-gradient(90deg, #1A1A1A, #06b6d4, #a78bfa, #1A1A1A);
+    background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; background-position: 0%; transition: background-position 0.6s ease;
+  }
+  .contact-link:hover { background-position: 100%; }
+  .contact-arrow { transition: transform 0.5s ease, color 0.5s ease; color: #1A1A1A; }
+  .contact-link-wrap:hover .contact-arrow { transform: translateX(16px); color: #06b6d4; }
+
+  /* ══════════════════════════════════════
+     PROJECT DETAIL OVERLAY (single-page)
+  ═══════════════════════════════════════ */
+  #project-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: #ffffff;
+    overflow-y: auto;
+    opacity: 0; pointer-events: none;
+    transform: translateY(30px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  #project-overlay.open {
+    opacity: 1; pointer-events: auto; transform: translateY(0);
+  }
+  .overlay-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: #71717a; cursor: pointer;
+    transition: color 0.2s ease; font-weight: 300; letter-spacing: 0.05em;
+  }
+  .overlay-back:hover { color: #06b6d4; }
+</style>
+</head>
+<body class="bg-background text-on-background selection:bg-aqua/30">
+
+<!-- ════════════════════════════════════════
+     PROJECT DETAIL OVERLAY
+════════════════════════════════════════ -->
+<div id="project-overlay">
+  <div class="max-w-4xl mx-auto px-8 py-16">
+    <button class="overlay-back mb-12" onclick="closeProject()">
+      <span class="material-symbols-outlined" style="font-size:18px">arrow_back</span>
+      Back to portfolio
+    </button>
+    <!-- Hero image -->
+    <div id="po-image-container" class="aspect-video rounded-brand overflow-hidden mb-12 bg-zinc-50">
+      <img id="po-image" class="w-full h-full object-cover" src="" alt=""/>
+    </div>
+    <!-- Tags -->
+    <div id="po-tags" class="flex gap-2 flex-wrap mb-6"></div>
+    <!-- Title -->
+    <h1 id="po-title" class="font-display text-4xl md:text-5xl text-on-background mb-6 leading-tight"></h1>
+    <!-- Meta row -->
+    <div id="po-meta" class="flex gap-8 text-sm text-zinc-400 font-light mb-10 border-b border-zinc-100 pb-8"></div>
+    <!-- Description -->
+    <div id="po-desc" class="text-lg text-secondary font-light leading-relaxed space-y-5 max-w-2xl"></div>
+    <!-- Gallery of additional images -->
+    <div id="po-gallery" class="grid grid-cols-2 gap-6 mt-12"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     NAVBAR — true CSS-grid centred
+════════════════════════════════ -->
+<nav id="main-nav" class="fixed top-6 left-1/2 -translate-x-1/2 w-[85%] max-w-6xl rounded-full border border-zinc-200/50 bg-white/80 backdrop-blur-xl px-8 py-3 z-50 shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+
+  <a id="nav-logo" href="#" onclick="scrollToTop(event)" class="cursor-pointer">
+    <img src="images/logo_2.png" alt="Logo" width="48" height="48">
+  </a>
+
+  <div id="nav-links" class="hidden md:flex items-center gap-10 font-light tracking-wide text-sm">
+    <a class="nav-link" href="#section-about"   onclick="navClick(event,'section-about')">About me</a>
+    <a class="nav-link" href="#section-works"   onclick="navClick(event,'section-works')">Projects</a>
+    <a class="nav-link" href="#section-exp"     onclick="navClick(event,'section-exp')">Experience</a>
+  </div>
+
+  <div id="nav-cta" class="flex justify-end">
+    <button onclick="navClick(event,'section-contact')" class="bg-primary text-on-primary px-7 py-2 rounded-full text-sm font-light hover:opacity-80 transition-all duration-300 scale-95 active:scale-90">
+      Let's Talk
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════
+     MAIN
+════════════════════════════════ -->
+<main class="max-w-[1400px] mx-auto px-12 md:px-24">
+
+  <!-- ── HERO ── -->
+  <section id="section-hero" class="hero-bg min-h-screen flex flex-col justify-center pt-24 relative overflow-hidden">
+
+    <!-- Gradient orb — right side -->
+    <div class="hero-orb"></div>
+
+    <div class="max-w-4xl relative z-10">
+      <h1 class="font-display text-5xl md:text-7xl text-on-background mb-8 leading-[1.15] tracking-tight">
+        <span id="hero-prefix"></span><span class="text-on-background font-normal" id="typing-word"></span><span id="typing-cursor-el"></span>
+      </h1>
+
+      <p id="hero-sub" class="hero-rest font-body-lg text-lg md:text-xl text-secondary max-w-2xl leading-relaxed font-light">
+        ...and a quick learner for whatever else you’re building.
+      </p>
+
+      <div id="hero-btns" class="hero-rest mt-12 flex gap-5">
+        <button onclick="navClick(event,'section-works')"
+          class="bg-primary text-on-primary px-10 py-4 rounded-brand font-light text-lg md:text-xl hover:opacity-90 transition-all">
+          View Projects
+        </button>
+        <!-- About me button: hover → blue background -->
+        <button onclick="navClick(event,'section-about')"
+          class="border border-primary text-on-background px-10 py-4 rounded-brand font-light text-lg md:text-xl
+                 hover:bg-cyan-500 hover:border-cyan-500 hover:text-white transition-all">
+          About me
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="section-about" class="section-padding flex justify-left">
+    <div class="max-w-4xl">
+      <h2 class="gradient-title about-line font-headline-lg text-4xl md:text-6xl mb-8">Crafting space and interface.</h2>
+      <div class="space-y-8 font-body-lg text-lg md:text-xl text-secondary font-light" style="line-height: 1.6;">
+        <p class="about-line" style="transition-delay:0.1s">My name is Agata. I'm an architectural engineer by education, soon to receive a master's degree. A passionate creative artist and aspiring programmer.</p>
+        <p class="about-line" style="transition-delay:0.2s">My professional experience includes work in an architecture studio and collaboration as a UX/UI Designer on tools for optimizing and automating architectural design processes.</p>
+        <p class="about-line" style="transition-delay:0.3s">Whether designing residential architecture or complex SaaS dashboards, I pursue one goal: clarity. My background in architecture brings structural discipline to digital products, making user journeys as intuitive as navigating a well-designed gallery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SELECTED WORKS ── -->
+  <section id="section-works" class="section-padding">
+    <div class="text-center mb-24 works-heading">
+      <h2 class="font-display text-4xl md:text-6xl mb-8 text-on-background">Selected Works</h2>
+      <div class="flex justify-center gap-2 bg-zinc-50 p-1 rounded-full w-fit mx-auto border border-zinc-100">
+        <button id="btn-ux"   class="filter-btn is-active px-8 py-2 rounded-full text-sm font-light" onclick="switchFilter('ux')">UX/UI design</button>
+        <button id="btn-arch" class="filter-btn          px-8 py-2 rounded-full text-sm font-light" onclick="switchFilter('arch')">Architecture</button>
+      </div>
+    </div>
+
+    <div id="works-wrapper">
+
+      <!-- UX grid -->
+      <div id="grid-ux" class="works-grid g-visible grid md:grid-cols-2 gap-gutter">
+
+        <div class="project-card" style="transition-delay:0.05s">
+          <!-- clickable wrapper covers image + title -->
+          <div class="card-clickable" onclick="openProject('industrial')">
+            <div class="aspect-video rounded-brand overflow-hidden mb-8">
+              <img class="card-img w-full h-full object-cover"
+                src="images/Industrial_website.png"
+                alt="Industrial"/>
+            </div>
+            <div class="flex gap-2 mb-4 px-2">
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Website</span>
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Product Design</span>
+            </div>
+            <div class="px-2">
+              <h3 class="proj-title font-headline-md text-2xl mb-3 text-on-background">Industrial</h3>
+            </div>
+          </div>
+          <p class="font-body-md text-secondary font-light px-2">An innovative PropTech platform for industrial real estate and logistics.</p>
+        </div>
+
+        <div class="project-card" style="transition-delay:0.15s">
+          <div class="card-clickable" onclick="openProject('outline')">
+            <div class="aspect-video rounded-brand overflow-hidden mb-8">
+              <img class="card-img w-full h-full object-cover"
+                src="images/OutlineAI_website.jpg"
+                alt="OutlineAI"/>
+            </div>
+            <div class="flex gap-2 mb-4 px-2">
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Website</span>
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Marketing</span>
+            </div>
+            <div class="px-2">
+              <h3 class="proj-title font-headline-md text-2xl mb-3 text-on-background">OutlineAI</h3>
+            </div>
+          </div>
+          <p class="font-body-md text-secondary font-light px-2">A company specializing in the development of advanced algorithms for the architectural design sector.</p>
+        </div>
+
+        <div class="project-card" style="transition-delay:0.15s">
+          <div class="card-clickable" onclick="openProject('form')">
+            <div class="aspect-video rounded-brand overflow-hidden mb-8">
+              <img class="card-img w-full h-full object-cover"
+                src="images/RelineAI_website.jpg"
+                alt="RelineAI"/>
+            </div>
+            <div class="flex gap-2 mb-4 px-2">
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Website</span>
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Product Design</span>
+            </div>
+            <div class="px-2">
+              <h3 class="proj-title font-headline-md text-2xl mb-3 text-on-background">RelineAI</h3>
+            </div>
+          </div>
+          <p class="font-body-md text-secondary font-light px-2">AI-powered platform that automates store layout design, site assessment, and investment decisions.</p>
+        </div>
+
+        <div class="project-card" style="transition-delay:0.15s">
+          <div class="card-clickable" onclick="openProject('ooc')">
+            <div class="aspect-video rounded-brand overflow-hidden mb-8">
+              <img class="card-img w-full h-full object-cover"
+                src="images/OOC_Website.jpg"
+                alt="OOC Clinic"/>
+            </div>
+            <div class="flex gap-2 mb-4 px-2">
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Website</span>
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Web Experience</span>
+            </div>
+            <div class="px-2">
+              <h3 class="proj-title font-headline-md text-2xl mb-3 text-on-background">One&Only Clinic</h3>
+            </div>
+          </div>
+          <p class="font-body-md text-secondary font-light px-2">A website for a very modern and elegant dental office.</p>
+        </div>
+      </div><!-- /grid-ux -->
+
+      <!-- Architecture grid -->
+      <div id="grid-arch" class="works-grid g-hidden grid md:grid-cols-2 gap-gutter">
+
+        <div class="project-card" style="transition-delay:0.15s">
+          <div class="card-clickable" onclick="openProject('eco_center')">
+            <div class="aspect-video rounded-brand overflow-hidden mb-8">
+              <img class="card-img w-full h-full object-cover"
+                src="images/Centrum_recyklingu.jpg"
+                alt="Centrum Recyklingu"/>
+            </div>
+            <div class="flex gap-2 mb-4 px-2">
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Public building</span>
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Green design</span>
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Accessible design</span>
+            </div>
+            <div class="px-2">
+              <h3 class="proj-title font-headline-md text-2xl mb-3 text-on-background">Eco-recycling Center</h3>
+            </div>
+          </div>
+          <p class="font-body-md text-secondary font-light px-2">E-commerce experience for a bespoke furniture studio focusing on raw materials.</p>
+        </div>
+
+        <div>
+          <div class="card-clickable" onclick="openProject('social_center')">
+            <div class="aspect-video rounded-brand overflow-hidden mb-8">
+              <img class="card-img w-full h-full object-cover"
+                src="images/Centrum_uslug_spolecznych.jpg"
+                alt="Centrum Usług Społecznych"/>
+            </div>
+            <div class="flex gap-2 mb-4 px-2">
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Public building</span>
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Passive design</span>
+              <span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">Accessible design</span>
+            </div>
+            <div class="px-2">
+              <h3 class="proj-title font-headline-md text-2xl mb-3 text-on-background">Social Services Center</h3>
+            </div>
+          </div>
+          <p class="font-body-md text-secondary font-light px-2">Minimalist studio space designed around silence and natural light.</p>
+        </div>
+
+      </div><!-- /grid-arch -->
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE ── -->
+  <section id="section-exp" class="section-padding">
+    <div class="grid md:grid-cols-3 gap-24 items-start">
+
+      <!-- LEFT: Expertise -->
+      <div class="col-span-1">
+        <h2 class="font-headline-lg text-3xl text-on-background mb-10">Expertise</h2>
+        <div id="skills-container">
+
+          <div id="skills-senior" class="skill-panel sp-visible space-y-5">
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Skills</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">User Research</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Design Systems</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Design Tokens</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Visual Identity</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Prototyping</span></div>
+          </br>
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Software</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Figma</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Adobe Photoshop</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Adobe Illustrator</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Adobe Lightroom</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Premiere Pro</span></div>
+        </br>
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Languages</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">HTML</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Python</span></div>
+          </div>
+
+          <div id="skills-arch" class="skill-panel sp-hidden space-y-5">
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Skills</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Architectural concepts</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Spatial Planning</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Inventory</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Presentation</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Aarchitectural engineering drawings</span></div>
+          </br>
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Software</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">AutoCAD</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Adobe Photoshop</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">PowerPoint</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">SketchUp</span></div>
+          </div>
+
+          <div id="skills-ui" class="skill-panel sp-hidden space-y-5">
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Skills</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Creating logo</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Creating graphics</span></div>
+          </br>
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Software</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Adobe Illustrator</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Adobe Photoshop</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Gimp</span></div>
+          </div>
+
+          <div id="skills-architecturestudies" class="skill-panel sp-hidden space-y-5">
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Skills</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Architectural Design</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Urban Planning</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Graphic Design</span></div>
+          </br>
+            <div class="flex items-center gap-4"><span class="font-body-md font-light text-on-background">Software</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">AutoCAD</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Revit</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Rhino + Grasshopper</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">SketchUp</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Lumion</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Adobe Photoshop</span></div>
+            <div class="flex items-center gap-4"><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span><span class="font-body-md font-light text-on-background">Adobe Illustrator</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT: Journey + Education timelines -->
+      <div class="col-span-2">
+        <h2 class="font-headline-lg text-3xl text-on-background mb-10">Journey</h2>
+
+        <!-- Experience timeline -->
+        <div class="border-l border-zinc-100 pl-10 relative space-y-16">
+
+          <div class="exp-item active relative" data-skills="skills-senior" onclick="selectExp(this)">
+            <div class="exp-dot absolute -left-[45px] top-1.5 w-3 h-3 rounded-full border-4 border-white shadow-sm" style="background:#22d3ee"></div>
+            <span class="text-xs text-zinc-400 font-light mb-2 block uppercase tracking-widest">feb 2025 - jan 2026</span>
+            <h4 class="font-headline-md text-xl mb-2 text-on-background">Junior UX/UI Designer | OutlineAI</h4>
+            <p class="font-body-md text-secondary font-light leading-relaxed">Working on user research and wireframing for new product features. Working on designing apps, websites and marketing materials.</p>
+          </div>
+
+          <div class="exp-item relative" data-skills="skills-arch" onclick="selectExp(this)">
+            <div class="exp-dot absolute -left-[45px] top-1.5 w-3 h-3 rounded-full border-4 border-white" style="background:#e4e4e7"></div>
+            <span class="text-xs text-zinc-400 font-light mb-2 block uppercase tracking-widest">may 2023 - jan 2024</span>
+            <h4 class="font-headline-md text-xl mb-2 text-on-background">Architectural Designer | MIDI Pracownia Architektoniczna</h4>
+            <p class="font-body-md text-secondary font-light leading-relaxed">Working on conceptual projects for residential architecture. Preparing presentations for clients.</p>
+          </div>
+
+          <div class="exp-item relative" data-skills="skills-ui" onclick="selectExp(this)">
+            <div class="exp-dot absolute -left-[45px] top-1.5 w-3 h-3 rounded-full border-4 border-white" style="background:#e4e4e7"></div>
+            <span class="text-xs text-zinc-400 font-light mb-2 block uppercase tracking-widest">apr 2023 - may 2023</span>
+            <h4 class="font-headline-md text-xl mb-2 text-on-background">Graphic Designer | Vencint</h4>
+            <p class="font-body-md text-secondary font-light leading-relaxed">Creating logo and visual identities.</p>
+          </div>
+
+          <!-- ── Education divider + entries ── -->
+          <div class="timeline-label -ml-10 pl-10">Education</div>
+
+          <div class="exp-item relative" data-skills="skills-architecturestudies" onclick="selectExp(this)">
+            <div class="exp-dot absolute -left-[45px] top-1.5 w-3 h-3 rounded-full border-4 border-white" style="background:#e4e4e7"></div>
+            <span class="text-xs text-zinc-400 font-light mb-2 block uppercase tracking-widest">2024-2026</span>
+            <h4 class="font-headline-md text-xl mb-2 text-on-background">MSc Architecture</h4>
+            <p class="font-body-md text-secondary font-light leading-relaxed">Gdansk University of Technology</p>
+          </div>
+
+          <div class="exp-item relative" data-skills="skills-architecturestudies" onclick="selectExp(this)">
+            <div class="exp-dot absolute -left-[45px] top-1.5 w-3 h-3 rounded-full border-4 border-white" style="background:#e4e4e7"></div>
+            <span class="text-xs text-zinc-400 font-light mb-2 block uppercase tracking-widest">2020-2024</span>
+            <h4 class="font-headline-md text-xl mb-2 text-on-background">BSc Architecture</h4>
+            <p class="font-body-md text-secondary font-light leading-relaxed">Gdansk University of Technology</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="section-contact" class="contact-section section-padding text-center rounded-3xl mb-8">
+    <div class="contact-inner">
+      <h2 class="font-display text-4xl md:text-5xl mb-6 text-on-background">Have a project in mind?</h2>
+      <p class="font-body-lg text-secondary mb-16 max-w-2xl mx-auto font-light text-lg">I'm currently accepting new collaborations for both digital and architectural projects.</p>
+      <a class="contact-link-wrap group inline-flex items-center gap-6 tracking-tighter" href="mailto:agata.anielska3@gmail.com">
+        <span class="contact-link font-display text-5xl md:text-7xl font-light">Contact me</span>
+        <span class="contact-arrow material-symbols-outlined text-5xl md:text-7xl">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="w-full py-24 mt-20 border-t border-zinc-50">
+  <div class="max-w-[1400px] mx-auto px-12 md:px-24 flex flex-col md:flex-row justify-between items-center gap-10">
+    <div class="font-light text-[10px] tracking-[0.2em] uppercase text-zinc-400">© 2026 Agata Anielska</div>
+    <div class="flex gap-10">
+      <a class="font-light text-[10px] tracking-[0.2em] uppercase text-zinc-400 hover:text-cyan-500 transition-colors duration-300" href="https://www.linkedin.com/in/agata-anielska-9a174433b">LinkedIn</a>
+      <a class="font-light text-[10px] tracking-[0.2em] uppercase text-zinc-400 hover:text-cyan-500 transition-colors duration-300" href="https://www.flipsnack.com/BFB5CD5EFB5/portfolio-agata-anielska-7p0xe6gseo/full-view.html">My Architecture Portfolio!</a>
+      <a class="font-light text-[10px] tracking-[0.2em] uppercase text-zinc-400 hover:text-cyan-500 transition-colors duration-300" href="tel:+48668947070">+48 668947070</a>
+      <a class="font-light text-[10px] tracking-[0.2em] uppercase text-zinc-400 hover:text-cyan-500 transition-colors duration-300" href="mailto:agata.anielska3@gmail.com">agata.anielska3@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  PROJECT DATA — edit descriptions here
+// ══════════════════════════════════════════════════════════
+const PROJECTS = {
+  industrial: {
+    title: 'IndustrialAI',
+    image: 'images/Industrial_website.png',
+    url: 'https://industrial.outlineai.com/',
+    images: [
+      'images/Industrial_app_0.png',
+      'images/Industrial_app_1.png',
+      'images/Industrial_app_2.png'
+    ],
+    images2: [
+      'images/Industrial_post_1.png',
+      'images/Industrial_post_2.png'
+    ],
+    tags: ['Website', 'Product Design'],
+    meta: [{ label: 'Year', value: '2025' }, { label: 'Role', value: 'UX/UI Designer' }, { label: 'Tools', value: 'Figma' }],
+    description: {
+      introduction: [
+        'Industrial is an AI-driven PropTech platform focused on industrial real estate and logistics. The app enables users to plan, analyze, and optimize warehouse projects with scalable, data-rich tools, while the website communicates the platform’s value, supports marketing efforts, and strengthens brand identity.'
+      ],
+      challenges: [
+        'The main challenge was designing an interface capable of handling complex data visualizations without overwhelming users.',
+        'Ensuring consistency across the app while supporting diverse use cases required a flexible system.',
+        'On the website side, the challenge was to present technical, AI-driven solutions in a clear, engaging, and accessible way, while aligning with marketing needs.'
+      ],
+      solution: [
+        'A comprehensive design system was created to unify the app experience, allowing for scalable, consistent, and intuitive handling of complex data.',
+        'Clear visual hierarchies and reusable components improved usability and efficiency.',
+        'For the website, a cohesive visual language and structured content approach were developed, supported by tailored promotional materials to effectively communicate the product’s value across platforms.'
+      ]
+    },
+    galleryText: 'Gallery of IndustrialAI projects'
+  },
+  outline: {
+    title: 'OutlineAI',
+    image: 'images/OutlineAI_website.jpg',
+    url: 'https://reline.ai/',
+    images: [
+      'images/OutlineAI_linkedin_1.jpg',
+      'images/OutlineAI_linkedin_2.jpg'
+    ],
+    tags: ['Website', 'Marketing'],
+    meta: [{ label: 'Year', value: '2025' }, { label: 'Role', value: 'UX/UI Designer' }, { label: 'Tools', value: 'Figma, Adobe Suite' }],
+    description: {
+      introduction: [
+        'Outline AI is a tool for investors, developers, and architects to analyze land and generate buildable site layouts using artificial intelligence.'
+      ],
+      challenges: [
+        'The app automates feasibility studies, zoning compliance, and site capacity analysis, reducing weeks of manual work to minutes.',
+        'It helps decision-makers make faster, smarter development choices.'
+      ],
+      solution: [
+        'My responsibilities included creating a website design and producing promotional graphics for the company.',
+        'This included LinkedIn posts and graphic materials for various events the company participated in.'
+      ]
+    }
+  },
+  form: {
+    title: 'RelineAI',
+    image: 'images/RelineAI_website.jpg',
+    url: 'https://reline.ai',
+    images: [
+      'images/RelineAI_linkedin_1.jpg',
+      'images/RelineAI_linkedin_2.jpg'
+    ],
+    tags: ['Website', 'Product Design'],
+    meta: [{ label: 'Year', value: '2025' }, { label: 'Role', value: 'UX/UI Designer' }, { label: 'Tools', value: 'Figma' }],
+    description: {
+      introduction: [
+        'AI-powered platform that automates store layout design, site assessment, and investment decisions.',
+        'RelineAI is redefining how retail chains expand and optimize their physical presence.'
+      ],
+      challenges: [
+        'The challenge was to present complex retail planning capabilities through a clean, user-friendly website.',
+        'The design needed to clearly communicate the platform’s value while supporting the branding process.'
+      ],
+      solution: [
+        'My responsibilities included preparing the initial website design and creating various supporting materials.',
+        'I also participated in the branding process and helped create LinkedIn posts and presentations.'
+      ]
+    }
+  },
+  ooc: {
+    title: 'One&Only Clinic',
+    image: 'images/OOC_Website.jpg',
+    url: 'https://oneandonlyclinic.pl/',
+    tags: ['Website', 'Web Experience'],
+    meta: [{ label: 'Year', value: '2025' }, { label: 'Role', value: 'Web Designer' }, { label: 'Tools', value: 'Figma' }],
+    description: {
+      introduction: [
+        'One&Only Clinic is a clinic that cares about the needs of others and focuses on professionalism.'
+      ],
+      challenges: [
+        'The brief called for a minimalist, clean, and transparent site that still provided all necessary user information.'
+      ],
+      solution: [
+        'I participated in the design process of the website to ensure the final solution felt elegant, functional, and easy to navigate.'
+      ]
+    }
+  },
+  eco_center: {
+    title: 'Eco-Recycling Center',
+    image: 'images/Centrum_recyklingu.jpg',
+    tags: ['Public building', 'Green design', 'Accessible design'],
+    meta: [{ label: 'Year', value: '2025' }, { label: 'Role', value: 'Web Designer' }, { label: 'Tools', value: 'Figma' }],
+    description: {
+      introduction: [
+        'Tematem projektu jest budynek pełniący funkcję Centrum Eco-Recyklingu w Sopocie przy ul. Haffnera. Idea projektu zrodziła się z narastającego problemu nieodpowiednio poddawanych recyklingowi odpadów oraz chęci stworzenia przestrzeni która będzie służyć mieszkańcom w celach rekreacyjnych.'
+      ],
+      challenges: [
+        'Projektowane założenie składa się z 3 budynków. Pierwszy przy zachodniej granicy działki miałby pełnić funkcję sortowni, gdzie trafiały by rzeczy oddawane do recyklingu, a następnie po oczyszczeniu przenoszone by były do głównego budynku znajdującego się przy północnej granicy.'
+      ],
+      solution: [
+        'Przy wschodniej granicy działki projektowany jest instytut badawczy zajmujący się materiałami i recyklingiem. Nazwa “Serca” pochodzi od dosłownego oraz metaforycznego nawiązania. Patrząc na rzut kondygnacji parteru, budynek swoim kształtem przypomina serce. Budynek jest również sercem całego założenia, gdyż najbardziej będzie skupiać ludzi z sąsiednich budynków oraz odwiedzających go mieszkańców Sopotu'
+      ]
+    }
+  },
+  social_center: {
+    title: 'Social Services Center',
+    image: 'images/Centrum_uslug_spolecznych.jpg',
+    tags: ['Public building', 'Passive design', 'Accessible design'],
+    meta: [{ label: 'Year', value: '2025' }, { label: 'Role', value: 'Web Designer' }, { label: 'Tools', value: 'Figma' }],
+    description: {
+      introduction: [
+        'A recording and creative studio designed entirely around the acoustic and psychological qualities of silence. The client — a composer and sound designer — needed a space that dissolved the boundary between work and meditation.'
+      ],
+      challenges: [
+        'Sound diffusion panels are integrated flush into polished plaster walls, rendered in a warm off-white that reads differently under the adjustable Kelvin lighting system. No hard right-angles appear in the room plan.'
+      ],
+      solution: [
+        'Natural materials — undyed wool, solid oak, and hand-thrown ceramic accessories — were specified to eliminate synthetic off-gassing and create a sensory environment conducive to deep focus.'
+      ]
+    }
+  }
+};
+
+// ══════════════════════════════════════════════════════════
+//  PROJECT OVERLAY
+// ══════════════════════════════════════════════════════════
+function openProject(id) {
+  const p = PROJECTS[id];
+  if (!p) return;
+
+  // Set image
+  const imgHTML = `<img class="w-full h-full object-cover" src="${p.image}" alt="${p.title}"/>`;
+  document.getElementById('po-image-container').innerHTML = imgHTML;
+
+  document.getElementById('po-tags').innerHTML = p.tags
+    .map(t => `<span class="px-3 py-1 bg-zinc-100 rounded-full text-[11px] font-light text-zinc-500 uppercase tracking-wider">${t}</span>`)
+    .join('');
+
+  // Set title
+  document.getElementById('po-title').innerHTML = p.url ? `<a href="${p.url}" target="_blank" class="hover:underline hover:text-cyan-500">${p.title}</a>` : p.title;
+
+  document.getElementById('po-meta').innerHTML = p.meta
+    .map(m => `<span><span class="text-zinc-300 mr-1">${m.label}</span>${m.value}</span>`)
+    .join('');
+
+  function renderDescSection(title, content) {
+    if (!content) return '';
+    const paragraphs = Array.isArray(content) ? content : [content];
+    return `<div class="mb-10"><h3 class="font-headline-md text-2xl mb-4 text-on-background">${title}</h3>${paragraphs.map(para => `<p>${para}</p>`).join('')}</div>`;
+  }
+
+  if (Array.isArray(p.description)) {
+    document.getElementById('po-desc').innerHTML = p.description
+      .map(para => `<p>${para}</p>`)
+      .join('');
+  } else {
+    document.getElementById('po-desc').innerHTML = [
+      renderDescSection('Introduction', p.description?.introduction),
+      renderDescSection('Key challenges', p.description?.challenges),
+      renderDescSection('Solution', p.description?.solution),
+    ].join('');
+  }
+
+  function renderGalleryItem(src) {
+    return `<div class="gallery-item rounded-brand overflow-hidden bg-zinc-50"><img class="gallery-image w-full h-auto object-contain" src="${src}" alt="${p.title}"/></div>`;
+  }
+
+  function updateGallerySpans() {
+    document.querySelectorAll('#po-gallery .gallery-item').forEach(item => {
+      const img = item.querySelector('img');
+      if (!img) return;
+      const applySpan = () => {
+        if (img.naturalWidth > img.naturalHeight) item.classList.add('col-span-2');
+      };
+      if (img.complete) applySpan();
+      else img.addEventListener('load', applySpan);
+    });
+  }
+
+  const galleryItems = [];
+  if (p.images && p.images.length) galleryItems.push(...p.images.map(renderGalleryItem));
+  const galleryText = Array.isArray(p.description)
+    ? p.description.join(' ')
+    : p.description
+      ? ['introduction', 'challenges', 'solution']
+          .flatMap(section => {
+            const value = p.description[section];
+            return Array.isArray(value) ? value : value ? [value] : [];
+          })
+          .join(' ')
+      : '';
+  if (galleryText || p.galleryText) galleryItems.push(`<div class="col-span-2 max-w-4xl mx-auto mt-10 text-lg text-secondary leading-relaxed">${galleryText || p.galleryText}</div>`);
+  if (p.images2 && p.images2.length) galleryItems.push(...p.images2.map(renderGalleryItem));
+
+  document.getElementById('po-gallery').innerHTML = galleryItems.join('');
+  updateGallerySpans();
+
+  const overlay = document.getElementById('project-overlay');
+  overlay.scrollTop = 0;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Push history state for back button support
+  window.history.pushState({overlay: true, project: id}, '', `#project-${id}`);
+}
+
+
+function closeProject() {
+  document.getElementById('project-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+
+  // Scroll to Selected Works section
+  const worksSection = document.getElementById('section-works');
+  if (worksSection) {
+    worksSection.scrollIntoView({behavior: 'smooth'});
+  }
+
+  // Clean up URL
+  window.history.replaceState(null, '', window.location.pathname);
+}
+
+// Close on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProject(); });
+
+// Handle browser back button
+window.addEventListener('popstate', () => {
+  if (!window.location.hash.startsWith('#project-')) {
+    closeProject();
+  }
+});
+
+// ══════════════════════════════════════════════════════════
+//  HERO TYPING — "Hi. I'm " prefix, then 4 cycling words
+// ══════════════════════════════════════════════════════════
+const prefixEl  = document.getElementById('hero-prefix');
+const wordEl    = document.getElementById('typing-word');
+const cursorEl  = document.getElementById('typing-cursor-el');
+const heroRests = document.querySelectorAll('.hero-rest');
+const navEl     = document.getElementById('main-nav');
+
+const PREFIX = "Hi. I'm ";
+const WORDS  = ['a UX/UI designer', 'an Architect', 'a Graphic Designer', 'a Creative'];
+let wordIdx = 0, charIdx = 0, deleting = false, uiRevealed = false;
+
+function typePrefix() {
+  const cur = prefixEl.textContent;
+  if (cur.length < PREFIX.length) {
+    prefixEl.textContent = PREFIX.substring(0, cur.length + 1);
+    setTimeout(typePrefix, 75);
+  } else {
+    cursorEl.classList.add('typing-cursor');
+    setTimeout(typeWord, 120);
+  }
+}
+
+function typeWord() {
+  const word = WORDS[wordIdx];
+  if (!deleting) {
+    charIdx++;
+    wordEl.textContent = word.substring(0, charIdx);
+    if (charIdx === word.length) {
+      deleting = true;
+      if (!uiRevealed) { uiRevealed = true; revealUI(); }
+      setTimeout(typeWord, 2000);
+      return;
+    }
+  } else {
+    charIdx--;
+    wordEl.textContent = word.substring(0, charIdx);
+    if (charIdx === 0) {
+      deleting = false;
+      wordIdx = (wordIdx + 1) % WORDS.length;
+      setTimeout(typeWord, 350);
+      return;
+    }
+  }
+  setTimeout(typeWord, deleting ? 48 : 88);
+}
+
+function revealUI() {
+  navEl.classList.add('nav-visible');
+  heroRests.forEach((el, i) => setTimeout(() => el.classList.add('revealed'), i * 200));
+}
+
+typePrefix();
+
+// ══════════════════════════════════════════════════════════
+//  NAVBAR — scroll-spy
+// ══════════════════════════════════════════════════════════
+const NAV_OFFSET = 100;
+const spySections = ['section-about','section-works','section-exp','section-contact'];
+const navLinks = document.querySelectorAll('.nav-link');
+
+function updateActiveLink() {
+  const scrollY = window.scrollY + NAV_OFFSET;
+  let active = '';
+  spySections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && scrollY >= el.offsetTop) active = id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href').replace('#','') === active);
+  });
+}
+window.addEventListener('scroll', updateActiveLink, { passive: true });
+updateActiveLink();
+
+// ══════════════════════════════════════════════════════════
+//  SCROLL helpers
+// ══════════════════════════════════════════════════════════
+function navClick(e, sectionId) {
+  e.preventDefault();
+  const el = document.getElementById(sectionId);
+  if (!el) return;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+}
+function scrollToTop(e) {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════════════════════════════════════════════════════════
+//  SCROLL REVEAL
+// ══════════════════════════════════════════════════════════
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.about-line, .works-heading, .project-card').forEach(el => revealObs.observe(el));
+
+// ══════════════════════════════════════════════════════════
+//  WORKS FILTER
+// ══════════════════════════════════════════════════════════
+let activeFilter = 'ux';
+function switchFilter(filter) {
+  if (filter === activeFilter) return;
+  activeFilter = filter;
+  document.getElementById('btn-ux').classList.toggle('is-active', filter === 'ux');
+  document.getElementById('btn-arch').classList.toggle('is-active', filter === 'arch');
+  const ux   = document.getElementById('grid-ux');
+  const arch = document.getElementById('grid-arch');
+  if (filter === 'ux')   { arch.classList.replace('g-visible','g-hidden'); ux.classList.replace('g-hidden','g-visible'); }
+  else                   { ux.classList.replace('g-visible','g-hidden'); arch.classList.replace('g-hidden','g-visible'); }
+}
+
+// ══════════════════════════════════════════════════════════
+//  EXPERIENCE — click to swap skill panel
+// ══════════════════════════════════════════════════════════
+function selectExp(item) {
+  const targetId = item.dataset.skills;
+  document.querySelectorAll('.exp-item').forEach(el => {
+    el.querySelector('.exp-dot').style.background = el === item ? '#22d3ee' : '#e4e4e7';
+  });
+  document.querySelectorAll('.skill-panel').forEach(panel => {
+    panel.classList[panel.id === targetId ? 'replace' : 'replace'](
+      panel.id === targetId ? 'sp-hidden' : 'sp-visible',
+      panel.id === targetId ? 'sp-visible' : 'sp-hidden'
+    );
+  });
+}
+
+// Handle direct navigation to project hash
+if (window.location.hash.startsWith('#project-')) {
+  const projectId = window.location.hash.replace('#project-', '');
+  openProject(projectId);
+}
+</script>
+</body>
+</html>
